@@ -6,6 +6,20 @@ from sqlalchemy.orm import relationship
 from app.db.db import Base
 
 
+class Institution(Base):
+    """Institution — Management API owns this table."""
+
+    __tablename__ = "institutions"
+    __table_args__ = {"schema": "management"}
+
+    id = Column(BigInteger, Identity(always=False), primary_key=True)
+    name = Column(String(255), nullable=False)
+    slug = Column(String(255), unique=True, nullable=False)
+    is_active = Column(Boolean, default=True, nullable=False)
+    created_at = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
+
 class User(Base):
     """User account — read-only copy of identity.users."""
 

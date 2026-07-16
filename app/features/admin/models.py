@@ -1,24 +1,10 @@
 from datetime import datetime
 
-from sqlalchemy import BigInteger, Boolean, Column, DateTime, ForeignKey, Identity, Numeric, String, Text
+from sqlalchemy import BigInteger, Column, DateTime, ForeignKey, Identity, Numeric, String, Text
 from sqlalchemy.orm import relationship
 
 from app.db.db import Base
-from app.features.auth.models import User  # noqa: F401 — required for FK relationships
-
-
-class Institution(Base):
-    """Institution — Management API owns this table."""
-
-    __tablename__ = "institutions"
-    __table_args__ = {"schema": "management"}
-
-    id = Column(BigInteger, Identity(always=False), primary_key=True)
-    name = Column(String(255), nullable=False)
-    slug = Column(String(255), unique=True, nullable=False)
-    is_active = Column(Boolean, default=True, nullable=False)
-    created_at = Column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
-    updated_at = Column(DateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+from app.features.auth.models import Institution, User  # noqa: F401 — required for FK relationships
 
 
 class Report(Base):
