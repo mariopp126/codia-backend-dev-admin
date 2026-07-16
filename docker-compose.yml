@@ -12,7 +12,7 @@ services:
 
   dev-postgres:
     image: postgres:16
-    container_name: dev-postgres
+    container_name: dev-postgres-admin
     expose:
       - "5432"
     env_file: .env
@@ -21,7 +21,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - dev-postgres-data:/var/lib/postgresql/data
+      - dev-postgres-admin-data:/var/lib/postgresql/data
 
 volumes:
-  dev-postgres-data:
+  dev-postgres-admin-data:
