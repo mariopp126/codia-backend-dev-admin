@@ -7,22 +7,10 @@ services:
     volumes:
       - ./:/app
     env_file: .env
-    depends_on:
-      - dev-postgres
+    networks:
+      - codia-shared
 
-  dev-postgres:
-    image: postgres:16
-    container_name: dev-postgres-admin
-    expose:
-      - "5432"
-    env_file: .env
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - ./app/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
-      - dev-postgres-admin-data:/var/lib/postgresql/data
-
-volumes:
-  dev-postgres-admin-data:
+networks:
+  codia-shared:
+    name: codia-shared
+    external: true
