@@ -1,0 +1,16 @@
+services:
+  codia-backend-admin:
+    build: .
+    container_name: codia-backend-admin
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./:/app
+    env_file: .env
+    networks:
+      - codia-shared
+
+networks:
+  codia-shared:
+    name: codia-shared
+    external: true
